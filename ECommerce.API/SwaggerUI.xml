@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ECommerce.API</name>
+    </assembly>
+    <members>
+        <member name="M:ECommerce.API.Controllers.BasketController.CreateBasket">
+            <summary>
+            Yeni Sepet Oluşturur.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.GetBasketItems(ECommerce.Application.Requests.GetBasketItemsRequest)">
+            <summary>
+            Sepetteki Ürünleri Getirir
+            </summary>
+            <param name="basketItemsRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.AddItemToBasket(ECommerce.Application.Requests.AddItemToBasketRequest)">
+            <summary>
+            Sepete Ürün Ekler
+            </summary>
+            <param name="addItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.UpdateItemFromBasket(ECommerce.Application.Requests.UpdateItemFromBasketRequest)">
+            <summary>
+            Sepetteki Ürünü Günceller
+            </summary>
+            <param name="updateItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.DeleteBasket">
+            <summary>
+            Sepeti Siler
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.RemoveItemFromBasket(ECommerce.Application.Requests.RemoveItemFromBasketRequest)">
+            <summary>
+            Sepetteki Ürünü Siler
+            </summary>
+            <param name="removeItem"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
