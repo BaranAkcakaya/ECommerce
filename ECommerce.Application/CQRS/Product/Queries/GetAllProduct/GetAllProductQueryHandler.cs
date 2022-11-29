@@ -18,7 +18,7 @@ namespace ECommerce.Application.CQRS.Queries.GetAllProduct
 
         public async Task<List<GetAllProductDto>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            var products = await _productReadRepository.GetAll();
+            var products = (await _productReadRepository.GetAll()).Skip(request.Page * request.Size).Take(request.Size);
             _logger.LogInformation("Tüm ürünler getirildi.");
             return products.Select(x => x.Map()).ToList();
         }

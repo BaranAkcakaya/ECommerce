@@ -27,9 +27,9 @@ namespace ECommerce.API.Controllers
         }
 
         [HttpGet]
-        public async Task<BaseResponse<List<GetAllProductDto>>> GetAll()
+        public async Task<BaseResponse<List<GetAllProductDto>>> GetAll([FromQuery] GetAllProductRequest getAllProduct)
         {
-            var query = new GetAllProductQuery();
+            var query = new GetAllProductQuery { Page = getAllProduct.Page, Size = getAllProduct.Size};
             var response = await _mediator.Send(query);
 
             return new()

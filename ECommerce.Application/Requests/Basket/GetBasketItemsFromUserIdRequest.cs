@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Application.Requests
 {
-    public class GetAllProductRequest
+    public class GetBasketItemsFromUserIdRequest
     {
-        public int Page { get; set; } = 0;
-        public int Size { get; set; } = 15;
+        public int UserId { get; set; }
     }
 }

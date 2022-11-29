@@ -27,7 +27,7 @@ namespace ECommerce.API.Controllers
         [Authorize(AuthenticationSchemes = "Admin")]
         public async Task<BaseResponse> Create([FromBody] CreatePaymentRequest createPaymentRequest)
         {
-            var calculate = await CalculatePayment(new() {BasketId = createPaymentRequest.BasketId, Discount = 0 });
+            var calculate = await CalculatePayment(new() {BasketId = createPaymentRequest.BasketId, Discount = createPaymentRequest.Discount });
             var query = calculate.Response.Map(createPaymentRequest);
             var response = await _mediator.Send(query);
 

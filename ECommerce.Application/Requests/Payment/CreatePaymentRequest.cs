@@ -14,5 +14,6 @@ namespace ECommerce.Application.Requests
         public string NameOnCard { get; set; }
         public PaymentOption PaymentOption { get; set; }
         public int BasketId { get; set; }
+        public int Discount { get; set; }
     }
 }

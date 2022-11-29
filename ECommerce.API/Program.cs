@@ -40,6 +40,9 @@ Logger log = new LoggerConfiguration()
 
 builder.Host.UseSerilog(log);
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => 
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(context =>
 {
@@ -69,6 +72,8 @@ if (app.Environment.IsProduction())
 app.UseSerilogRequestLogging();
 
 app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>());
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 

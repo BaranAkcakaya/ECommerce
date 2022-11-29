@@ -17,6 +17,13 @@
             <param name="basketItemsRequest"></param>
             <returns></returns>
         </member>
+        <member name="M:ECommerce.API.Controllers.BasketController.GetBasketItemsFromUserId(System.Int32)">
+            <summary>
+            Sepetteki Ürünleri Kullanıcı Id'sine göre getirir
+            </summary>
+            <param name="addItem"></param>
+            <returns></returns>
+        </member>
         <member name="M:ECommerce.API.Controllers.BasketController.AddItemToBasket(ECommerce.Application.Requests.AddItemToBasketRequest)">
             <summary>
             Sepete Ürün Ekler

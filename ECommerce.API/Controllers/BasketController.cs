@@ -4,6 +4,7 @@ using ECommerce.Application.CQRS.Commands.DeleteBasket;
 using ECommerce.Application.CQRS.Commands.RemoveItemFromBasket;
 using ECommerce.Application.CQRS.Commands.UpdateItemFromBasket;
 using ECommerce.Application.CQRS.Querys.GetBasketItems;
+using ECommerce.Application.CQRS.Querys.GetBasketItemsFromUserId;
 using ECommerce.Application.Requests;
 using ECommerce.Application.Responses;
 using ECommerce.Domain.Common;
@@ -53,6 +54,26 @@ namespace ECommerce.API.Controllers
         public async Task<BaseResponse<List<GetBasketItemsDto>>> GetBasketItems([FromRoute]GetBasketItemsRequest basketItemsRequest)
         {
             var query = new GetBasketItemsQuery { BasketId = basketItemsRequest.BasketId};
+            var response = await _mediator.Send(query);
+
+            return new()
+            {
+                Success = true,
+                ErrorMessage = null,
+                Response = response
+            };
+        }
+
+        /// <summary>
+        /// Sepetteki Ürünleri Kullanıcı Id'sine göre getirir
+        /// </summary>
+        /// <param name="addItem"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = "Admin")]
+        public async Task<BaseResponse<List<GetBasketItemsDto>>> GetBasketItemsFromUserId([FromQuery(Name = "ui")] int id)
+        {
+            var query = new GetBasketItemsFromUserIdQuery { UserId = id };
             var response = await _mediator.Send(query);
 
             return new()
