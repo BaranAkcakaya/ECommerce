@@ -1,4 +1,5 @@
 ﻿using ECommerce.Domain.Entities;
+using ECommerce.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace ECommerce.Domain.Identity
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenEndDate { get; set; }
         public ICollection<Basket> Baskets{ get; set; }
+        public UserRole UserRole { get; set; } = 0;
     }
 }
