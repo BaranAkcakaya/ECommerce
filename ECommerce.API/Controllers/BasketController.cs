@@ -1,4 +1,6 @@
-﻿using ECommerce.Application.CQRS.Commands.AddItemToBasket;
+﻿using ECommerce.Application.Attributes;
+using ECommerce.Application.Const;
+using ECommerce.Application.CQRS.Commands.AddItemToBasket;
 using ECommerce.Application.CQRS.Commands.CreateBasket;
 using ECommerce.Application.CQRS.Commands.DeleteBasket;
 using ECommerce.Application.CQRS.Commands.RemoveItemFromBasket;
@@ -8,6 +10,7 @@ using ECommerce.Application.CQRS.Querys.GetBasketItemsFromUserId;
 using ECommerce.Application.Requests;
 using ECommerce.Application.Responses;
 using ECommerce.Domain.Common;
+using ECommerce.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +19,7 @@ namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class BasketController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -30,7 +34,7 @@ namespace ECommerce.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Writing, Defination = "Create Basket.")]
         public async Task<BaseResponse<CreateBasketDto>> CreateBasket()
         {
             var query = new CreateBasketCommand();
@@ -50,7 +54,7 @@ namespace ECommerce.API.Controllers
         /// <param name="basketItemsRequest"></param>
         /// <returns></returns>
         [HttpGet("{BasketId}")]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Reading)]
         public async Task<BaseResponse<List<GetBasketItemsDto>>> GetBasketItems([FromRoute]GetBasketItemsRequest basketItemsRequest)
         {
             var query = new GetBasketItemsQuery { BasketId = basketItemsRequest.BasketId};
@@ -70,7 +74,7 @@ namespace ECommerce.API.Controllers
         /// <param name="addItem"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Reading)]
         public async Task<BaseResponse<List<GetBasketItemsDto>>> GetBasketItemsFromUserId([FromQuery(Name = "ui")] int id)
         {
             var query = new GetBasketItemsFromUserIdQuery { UserId = id };
@@ -90,7 +94,7 @@ namespace ECommerce.API.Controllers
         /// <param name="addItem"></param>
         /// <returns></returns>
         [HttpPost("item/add")]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Writing)]
         public async Task<BaseResponse> AddItemToBasket([FromBody]AddItemToBasketRequest addItem)
         {
             var query = new AddItemToBasketCommand {BasketId = addItem.BasketId, ProductId = addItem.ProductId};
@@ -110,7 +114,7 @@ namespace ECommerce.API.Controllers
         /// <param name="updateItem"></param>
         /// <returns></returns>
         [HttpPut("item/update")]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Updating)]
         public async Task<BaseResponse<UpdateItemFromBasketDto>> UpdateItemFromBasket(UpdateItemFromBasketRequest updateItem)
         {
             var query = new UpdateItemFromBasketCommand { BasketItemId = updateItem.BasketItemId, Quantity = updateItem.Quantity };
@@ -129,7 +133,7 @@ namespace ECommerce.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Deleting)]
         public async Task<BaseResponse> DeleteBasket()
         {
             var query = new DeleteBasketCommand();
@@ -149,7 +153,7 @@ namespace ECommerce.API.Controllers
         /// <param name="removeItem"></param>
         /// <returns></returns>
         [HttpDelete("item/delete")]
-        [Authorize(AuthenticationSchemes = "Admin")]
+        [AuthorizeDefination(Menu = AuthorizeDefinationConst.Baskets, ActionType = ActionType.Deleting)]
         public async Task<BaseResponse> RemoveItemFromBasket(RemoveItemFromBasketRequest removeItem)
         {
             var query = new RemoveItemFromBasketCommand { BasketItemId = removeItem.BasketItemId, BasketId = removeItem.BasketId};

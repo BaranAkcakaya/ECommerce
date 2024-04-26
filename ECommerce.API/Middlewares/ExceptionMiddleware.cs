@@ -16,9 +16,9 @@ namespace ECommerce.Application.Extensions
             {
                 appError.Run(async context =>
                 {
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     context.Response.ContentType = MediaTypeNames.Application.Json;
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
                         logger.LogError(contextFeature.Error.Message);

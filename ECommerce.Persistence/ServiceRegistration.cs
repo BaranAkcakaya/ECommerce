@@ -32,6 +32,7 @@ namespace ECommerce.Persistence
             })
             .AddEntityFrameworkStores<ECommerceDBContext>()
             .AddDefaultTokenProviders();
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Users/Login");
